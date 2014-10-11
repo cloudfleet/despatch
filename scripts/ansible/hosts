@@ -1,2 +1,2 @@
 [cloudfleet]
-cloudfleet.cloudfleet.io
+cloudfleet.cloudfleet.io ansible_ssh_user=root
