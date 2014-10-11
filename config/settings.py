@@ -1,3 +1,3 @@
 from salmon.server import SMTPReceiver
 
-receiver = SMTPReceiver('localhost',25252)
+receiver = SMTPReceiver('0.0.0.0',25)
