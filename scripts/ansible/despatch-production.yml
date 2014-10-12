@@ -24,6 +24,12 @@
     - name: install Python packages
       pip: requirements={{ PROJECT_HOME }}/requirements.txt
 
+    - name: create directories
+      file: "path={{ PROJECT_HOME }}/{{item}} state=directory"
+      with_items:
+        - logs
+        - run
+
     - name: restart despatch
-      command: "{{ PROJECT_HOME }}/scripts/restart-despatch.sh"
+      command: "{{ PROJECT_HOME }}/scripts/restart-despatch.sh chdir={{ PROJECT_HOME }}"
 
