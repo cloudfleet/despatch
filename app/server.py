@@ -1,4 +1,4 @@
-from pip._vendor import requests
+import requests
 from salmon.routing import nolocking, route, stateless
 import json
 
