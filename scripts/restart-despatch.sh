@@ -1,2 +1,6 @@
 #!/bin/bash
-(cd /opt/despatch && salmon stop && salmon start)
+if [[ `salmon status` != *not* ]]
+then
+  salmon stop
+fi
+salmon start
