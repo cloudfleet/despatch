@@ -1,5 +1,10 @@
 from salmon import queue
 from salmon.routing import Router
+import logging
+import logging.config
+import os
+
+logging.config.fileConfig("config/logging.conf")
 
 
 Router.defaults(**{})
