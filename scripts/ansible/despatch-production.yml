@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  varfile: relay-config.yml
   vars:
     PROJECT_HOME: "/opt/despatch"
 
@@ -18,6 +17,7 @@
        - python2.7
        - python-pip
        - nginx
+       - supervisor
 
     - name: clone git repository
       sudo: yes
@@ -35,13 +35,23 @@
     - name: copy nginx config file
       copy: src=files/nginx.conf dest=/etc/nginx/nginx.conf
 
+    - name: copy supervisord config file
+      template: "src=files/auth-service-supervisor.conf dest=/etc/supervisor/conf.d/auth-service.conf"
+
+    - name: Re-read the Supervisor config files
+      command: supervisorctl reread
+
+    - name: Update Supervisor to add the app in the process group
+      command: supervisorctl update
+
+    - name: Use Supervisor to restart spire
+      command: supervisorctl restart auth-service
+
     - name: copy relay config file
       copy: "src=files/relay-config.yml dest={{ PROJECT_HOME }}/config/relay-config.yml"
 
-    - name: start auth service
-      command: "nohup python scripts/smtp-auth.py > {{ PROJECT_HOME }}/logs/auth.log &"
-      args:
-        chdir: {{ PROJECT_HOME }}
+    - name: restart nginx
+      service: name=nginx pattern=/etc/init.d/nginx state=restarted enabled=yes
 
     - name: restart despatch
       command: "{{ PROJECT_HOME }}/scripts/restart-despatch.sh chdir={{ PROJECT_HOME }}"
