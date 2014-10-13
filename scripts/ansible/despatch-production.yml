@@ -1,5 +1,6 @@
 ---
 - hosts: all
+  varfile: relay-config.yml
   vars:
     PROJECT_HOME: "/opt/despatch"
 
@@ -16,6 +17,7 @@
        - git-core
        - python2.7
        - python-pip
+       - nginx
 
     - name: clone git repository
       sudo: yes
