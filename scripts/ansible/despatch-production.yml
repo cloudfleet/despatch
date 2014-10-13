@@ -32,6 +32,17 @@
         - logs
         - run
 
+    - name: copy nginx config file
+      copy: src=files/nginx.conf dest=/etc/nginx/nginx.conf
+
+    - name: copy relay config file
+      copy: "src=files/relay-config.yml dest={{ PROJECT_HOME }}/config/relay-config.yml"
+
+    - name: start auth service
+      command: "nohup python scripts/smtp-auth.py > {{ PROJECT_HOME }}/logs/auth.log &"
+      args:
+        chdir: {{ PROJECT_HOME }}
+
     - name: restart despatch
       command: "{{ PROJECT_HOME }}/scripts/restart-despatch.sh chdir={{ PROJECT_HOME }}"
 
