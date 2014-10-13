@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 
+
 # C extensions
 *.so
 
@@ -18,6 +19,7 @@ lib64/
 parts/
 sdist/
 var/
+logs/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -58,3 +60,6 @@ venv/
 
 # Vagrant
 .vagrant/
+
+# config
+scripts/ansible/files/relay-config.yml
