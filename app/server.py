@@ -14,7 +14,7 @@ def START(message, inbox=None, domain=None):
 
     log.info("===============================")
     log.info("received mail for %s@%s" % (inbox, domain))
-    target_url = "http://" + domain + "/mailbox/raw/" + inbox  # FIXME change to https
+    target_url = "http://blimp." + domain + "/mailbox/raw/" + inbox  # FIXME change to https
     r = requests.post(target_url, headers={"Content-transfer-encoding": "binary"}, data=message.to_message().as_string())
     log.info("Server Response: %s" % r.text)
 
