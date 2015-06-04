@@ -1,5 +1,0 @@
----
-- host: hostname
-  port: 25
-  user: mail-user
-  pass: supersecretpassword

@@ -1,7 +1,0 @@
-MAIL FROM: test@example.com
-RCPT TO: test-rcpt@example.com
-SUBJECT: Test Mail
-DATA
-That's a test
-.
-QUIT
