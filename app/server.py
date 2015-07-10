@@ -25,8 +25,8 @@ def forward_postmaster(message, domain):
 def deliver_to_blimp(message, inbox, domain):
     log.info("===============================")
     log.info("received mail for %s@%s" % (inbox, domain))
-    target_url = "http://blimp." + domain + "/mailbox/raw/" + inbox  # FIXME change to https
-    r = requests.post(target_url, headers={"Content-transfer-encoding": "binary"}, data=message.to_message().as_string())
+    target_url = "https://blimp." + domain + "/mailbox/raw/" + inbox  # FIXME change to https
+    r = requests.post(target_url, headers={"Content-transfer-encoding": "binary"}, data=message.to_message().as_string(), verify=False) # FIXME verify SSL
     log.info("Server Response: %s" % r.text)
 
 
